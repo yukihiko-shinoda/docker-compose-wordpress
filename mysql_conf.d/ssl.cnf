@@ -1,0 +1,5 @@
+[mysqld]
+ssl-ca = /etc/pki/CA/cacert.pem
+ssl-cert = /etc/pki/tls/certs/servercert.pem
+ssl-key = /etc/pki/tls/private/serverkey.pem
+sql_mode = TRADITIONAL,NO_AUTO_VALUE_ON_ZERO,ONLY_FULL_GROUP_BY
