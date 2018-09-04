@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PhpCodeSniffer">
+    <phpcs_settings>
+      <PhpCSConfiguration tool_path="$PROJECT_DIR$/wordpress-s3/vendor/bin/phpcs" />
+    </phpcs_settings>
+  </component>
+  <component name="PhpIncludePathManager">
+    <include_path>
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyeleven-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentythirteen-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyfifteen-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentysixteen-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyfourteen-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/akismet-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/woocommerce-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/wordpress-importer-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/bbpress-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/roots/wp-password-bcrypt" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/heroku/heroku-buildpack-php" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/vlucas/phpdotenv" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/squizlabs/php_codesniffer" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/johnpbloch/wordpress" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/johnpbloch/wordpress-core-installer" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/composer" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni/composer-dropin-installer" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/oscarotero/env" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-language/ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyten-ja" />
+      <path value="$PROJECT_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentytwelve-ja" />
+    </include_path>
+  </component>
+</project>

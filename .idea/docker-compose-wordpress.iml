@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="JAVA_MODULE" version="4">
+  <component name="NewModuleRootManager" inherit-compiler-output="true">
+    <exclude-output />
+    <content url="file://$MODULE_DIR$">
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/composer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/heroku/heroku-buildpack-php" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/johnpbloch/wordpress" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/johnpbloch/wordpress-core-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-language/ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/akismet-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/bbpress-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/woocommerce-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/wordpress-importer-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyeleven-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyfifteen-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyfourteen-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentysixteen-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyten-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentythirteen-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentytwelve-ja" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni/composer-dropin-installer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/oscarotero/env" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/roots/wp-password-bcrypt" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/squizlabs/php_codesniffer" />
+      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/vlucas/phpdotenv" />
+    </content>
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+  </component>
+</module>

@@ -14,9 +14,9 @@ services:
         published: 3306
     restart: always
     volumes:
-      - /opt/datastore/mysql:/var/lib/mysql
+      - /tmp/wordpress/mysql:/var/lib/mysql
       - ./mysql_conf.d:/etc/mysql/conf.d
-      - /etc/pki:/etc/pki
+      - ./pki:/etc/pki
       - ./initdb.d:/docker-entrypoint-initdb.d
 
   cache:
@@ -77,4 +77,4 @@ services:
 #      - /tmp/wordpress/var/logs:/app/var/logs
 #      - /tmp/wordpress/var/sessions:/app/var/sessions
       - /tmp/wordpress/vendor:/app/vendor
-      - /tmp/wordpress/static:/app/web/wp/static
+      - /tmp/wordpress/static:/app/static
