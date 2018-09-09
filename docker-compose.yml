@@ -77,4 +77,4 @@ services:
 #      - /tmp/wordpress/var/logs:/app/var/logs
 #      - /tmp/wordpress/var/sessions:/app/var/sessions
       - /tmp/wordpress/vendor:/app/vendor
-      - /tmp/wordpress/static:/app/static
+      - /tmp/wordpress/static:/app/web/static

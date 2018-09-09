@@ -5,3 +5,4 @@
 /pki/*
 !/pki/.gitkeep
 /.idea/workspace.xml
+/.env
