@@ -60,7 +60,7 @@ services:
 #      SYMFONY_REDIS_DSN_CACHE: redis://cache/1
 #      SYMFONY_REDIS_DSN_SESSION: redis://cache/2
 #      SYMFONY_REDIS_DSN_STORAGE: redis://cache/3
-    image: futureys/heroku-php-apache2
+    image: futureys/heroku-php-apache2:2.201812.26
     links:
       - database
       - cache
