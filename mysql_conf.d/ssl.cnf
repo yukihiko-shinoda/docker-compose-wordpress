@@ -1,5 +1,11 @@
 [mysqld]
-ssl-ca = /etc/pki/CA/cacert.pem
-ssl-cert = /etc/pki/tls/certs/servercert.pem
-ssl-key = /etc/pki/tls/private/serverkey.pem
+# Because php doesn't support caching_sha2_password now (2019-10-29)
+default_authentication_plugin=mysql_native_password
+# To force SSL connection
+require_secure_transport = ON
+# To secure database records more
 sql_mode = TRADITIONAL,NO_AUTO_VALUE_ON_ZERO,ONLY_FULL_GROUP_BY
+# SSL settings
+ssl-ca = /etc/pki/CA/cacert-futureys.net.pem
+ssl-cert = /etc/pki/tls/certs/servercert-futureys.net.pem
+ssl-key = /etc/pki/tls/private/serverkey-futureys.net.pem

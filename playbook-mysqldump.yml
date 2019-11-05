@@ -1,0 +1,13 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: list up databases
+      command: docker exec mysql sh -c 'exec mysql -uroot -p"$MYSQL_ROOT_PASSWORD" -N -e "show databases;"'
+      register: show_databases
+
+    - set_fact:
+        user_databases: '{{ show_databases.stdout_lines|reject("in", ["information_schema", "mysql", "performance_schema"])|list }}'
+
+    - name: dump user databases
+      shell: docker exec mysql sh -c 'exec mysqldump  -uroot -p"$MYSQL_ROOT_PASSWORD" --databases {{ user_databases|join(' ') }}' > initdb.d/mysql_dump_blog_$(date '+%Y%m%d%H%M%S').sql
