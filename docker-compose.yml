@@ -2,7 +2,7 @@
 version: '3.2'
 services:
   database:
-    container_name: mysql
+    container_name: database
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: service
@@ -18,14 +18,6 @@ services:
       - ./mysql_conf.d:/etc/mysql/conf.d
       - ./pki:/etc/pki
       - ./initdb.d:/docker-entrypoint-initdb.d
-
-  cache:
-    container_name: redis
-    image: redis:4
-    ports:
-      - target: 6379
-        published: 6379
-    restart: always
 
   web:
     container_name: web
@@ -55,27 +47,14 @@ services:
       SECURE_AUTH_SALT: ${WORDPRESS_SECURE_AUTH_SALT}
       LOGGED_IN_SALT: ${WORDPRESS_LOGGED_IN_SALT}
       NONCE_SALT: ${WORDPRESS_NONCE_SALT}
-#      SYMFONY_MYSQL_CA: ${SYMFONY_MYSQL_CA}
-#      SYMFONY_LOG_LEVEL: ${SYMFONY_LOG_LEVEL}
-#      SYMFONY_REDIS_DSN_DEFAULT: redis://cache/0
-#      SYMFONY_REDIS_DSN_CACHE: redis://cache/1
-#      SYMFONY_REDIS_DSN_SESSION: redis://cache/2
-#      SYMFONY_REDIS_DSN_STORAGE: redis://cache/3
     image: futureys/heroku-php-apache2:201911.01
-    links:
-      - database
-      - cache
     ports:
       - 80:80
     privileged: true
-    # restart: always
     tty: true
     volumes:
       - /etc/pki:/etc/pki
       - ./ansistrano-wordpress:/root/ansistrano-wordpress
       - ./wordpress-s3:/app
-#      - /tmp/wordpress/var/cache:/app/var/cache
-#      - /tmp/wordpress/var/logs:/app/var/logs
-#      - /tmp/wordpress/var/sessions:/app/var/sessions
       - /tmp/wordpress/vendor:/app/vendor
       - ./wordpress-s3/web/static:/app/web/static
