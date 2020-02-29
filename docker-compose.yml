@@ -1,8 +1,19 @@
 ---
-version: '3.2'
+version: '3.7'
 services:
+  ssl_certificate:
+    container_name: ssl_certificate
+    environment:
+      DOMAIN_NAME: futureys.net
+      USE_MYSQL: 'true'
+    image: futureys/ssl-certificate:latest
+    volumes:
+      - pki:/etc/pki
+
   database:
     container_name: database
+    depends_on:
+      - ssl_certificate
     environment:
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: service
@@ -14,13 +25,15 @@ services:
         published: 3306
     restart: always
     volumes:
-      - /tmp/wordpress/mysql:/var/lib/mysql
+      - pki:/etc/pki
       - ./mysql_conf.d:/etc/mysql/conf.d
-      - ./pki:/etc/pki
       - ./initdb.d:/docker-entrypoint-initdb.d
 
   web:
     container_name: web
+    depends_on:
+      - ssl_certificate
+      - database
     entrypoint:
       - sh
       - -cl
@@ -53,8 +66,13 @@ services:
     privileged: true
     tty: true
     volumes:
-      - /etc/pki:/etc/pki
+      - pki:/etc/pki
       - ./ansistrano-wordpress:/root/ansistrano-wordpress
       - ./wordpress-s3:/app
-      - /tmp/wordpress/vendor:/app/vendor
-      - ./wordpress-s3/web/static:/app/web/static
+      - vendor:/app/vendor
+volumes:
+  pki:
+    driver_opts:
+      type: tmpfs
+      device: tmpfs
+  vendor:

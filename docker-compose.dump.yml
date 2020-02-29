@@ -1,0 +1,13 @@
+---
+version: '3.7'
+services:
+  dump:
+    container_name: dump
+    image: futureys/dump-mysql
+    environment:
+      LOGIN_USER: root
+      LOGIN_PASSWORD: ${DATABASE_ROOT_PASSWORD}
+      ANSIBLE_VERBOSITY: 3
+      ANSIBLE_FORCE_COLOR: 'True'
+    volumes:
+      - ./initdb.d:/root/storage

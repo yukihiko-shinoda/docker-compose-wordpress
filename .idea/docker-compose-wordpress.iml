@@ -2,59 +2,7 @@
 <module type="JAVA_MODULE" version="4">
   <component name="NewModuleRootManager" inherit-compiler-output="true">
     <exclude-output />
-    <content url="file://$MODULE_DIR$">
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/bjornjohansen/wplang" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/composer" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/doctrine/instantiator" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/heroku/heroku-buildpack-php" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/johnpbloch/wordpress" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/johnpbloch/wordpress-core-installer" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-language/ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/akismet-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/bbpress-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/woocommerce-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-plugin-language/wordpress-importer-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyeleven-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyfifteen-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyfourteen-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentysixteen-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentyten-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentythirteen-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni-theme-language/twentytwelve-ja" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/koodimonni/composer-dropin-installer" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/myclabs/deep-copy" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/oscarotero/env" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phar-io/manifest" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phar-io/version" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpdocumentor/reflection-common" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpdocumentor/reflection-docblock" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpdocumentor/type-resolver" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpspec/prophecy" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpunit/php-code-coverage" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpunit/php-file-iterator" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpunit/php-text-template" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpunit/php-timer" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpunit/php-token-stream" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/phpunit/phpunit" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/roots/wp-password-bcrypt" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/code-unit-reverse-lookup" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/comparator" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/diff" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/environment" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/exporter" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/global-state" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/object-enumerator" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/object-reflector" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/recursion-context" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/resource-operations" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/type" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/sebastian/version" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/squizlabs/php_codesniffer" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/symfony/polyfill-ctype" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/theseer/tokenizer" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/vlucas/phpdotenv" />
-      <excludeFolder url="file://$MODULE_DIR$/wordpress-s3/vendor/webmozart/assert" />
-    </content>
+    <content url="file://$MODULE_DIR$" />
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
   </component>
