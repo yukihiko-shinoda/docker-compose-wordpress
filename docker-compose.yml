@@ -50,7 +50,8 @@ services:
       WP_ENV: ${WORDPRESS_ENV?err}
       WP_HOME: http://localhost
       WP_SITEURL: http://localhost/wp
-      WP_STATIC_PRESS_S3_MAGIC_FILE_PATH: /etc/httpd/conf/magic
+      # @see https://www.php.net/manual/en/function.finfo-open.php
+      MAGIC: /etc/httpd/conf/magic
       # Generate your keys here: https://roots.io/salts.html
       AUTH_KEY: ${WORDPRESS_AUTH_KEY}
       SECURE_AUTH_KEY: ${WORDPRESS_SECURE_AUTH_KEY}
@@ -70,6 +71,7 @@ services:
       - ./ansistrano-wordpress:/root/ansistrano-wordpress
       - ./wordpress-s3:/app
       - vendor:/app/vendor
+      # - ../plugins:/plugins
 volumes:
   pki:
     driver_opts:
