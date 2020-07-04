@@ -1,10 +1,10 @@
 ---
-version: '3.7'
+version: '3.8'
 services:
   ssl_certificate:
     container_name: ssl_certificate
     environment:
-      DOMAIN_NAME: futureys.net
+      DOMAIN_NAME: ${DOMAIN_NAME}
       USE_MYSQL: 'true'
     image: futureys/ssl-certificate:latest
     volumes:
@@ -29,29 +29,30 @@ services:
       - ./mysql_conf.d:/etc/mysql/conf.d
       - ./initdb.d:/docker-entrypoint-initdb.d
 
-  web:
-    container_name: web
-    depends_on:
-      - ssl_certificate
-      - database
-    entrypoint:
+  fpm:
+    # build:
+    #   context: fpm
+    container_name: fpm
+    # Original: CMD ["php-fpm"]
+    # @see https://github.com/docker-library/php/blob/b4aeb948e2e240c732d78890ff03285b16e8edda/7.0/fpm/Dockerfile
+    command:
       - sh
-      - -cl
-      - "cd /root && ansible-playbook ansistrano-wordpress/deploy_without_ansistrano.yml -i ansistrano-wordpress/inventories/development -vvv --extra-vars '{\"is_container\": true}' && cd /app && heroku local -p 80"
-#      - /bin/bash
+      - -c
+      - "composer ${COMPOSER_COMMAND:-update} --prefer-dist --optimize-autoloader && php-fpm"
+    depends_on:
+      - database
+      # - composer
     environment:
+      # Bedrock
       DB_NAME: service
       DB_USER: app
       DB_PASSWORD: ${DATABASE_USER_PASSWORD}
       # Optional variables
       DB_HOST: database
-      MYSQL_SSL_CA: /etc/pki/CA/cacert-futureys.net.pem
       # DB_PREFIX=wp_
       WP_ENV: ${WORDPRESS_ENV?err}
-      WP_HOME: http://localhost
-      WP_SITEURL: http://localhost/wp
-      # @see https://www.php.net/manual/en/function.finfo-open.php
-      MAGIC: /etc/httpd/conf/magic
+      WP_HOME: https://local.${DOMAIN_NAME}
+      WP_SITEURL: https://local.${DOMAIN_NAME}/wp
       # Generate your keys here: https://roots.io/salts.html
       AUTH_KEY: ${WORDPRESS_AUTH_KEY}
       SECURE_AUTH_KEY: ${WORDPRESS_SECURE_AUTH_KEY}
@@ -61,20 +62,35 @@ services:
       SECURE_AUTH_SALT: ${WORDPRESS_SECURE_AUTH_SALT}
       LOGGED_IN_SALT: ${WORDPRESS_LOGGED_IN_SALT}
       NONCE_SALT: ${WORDPRESS_NONCE_SALT}
-    image: futureys/heroku-php-apache2:20200625182000
-    ports:
-      - 80:80
-    privileged: true
-    tty: true
+      # WordPress
+      MYSQL_SSL_CA: /etc/pki/CA/cacert-${DOMAIN_NAME}.pem
+      # StaticPress2019-S3
+      # @see https://www.php.net/manual/en/function.finfo-open.php
+      MAGIC: /etc/httpd/conf/magic
+    # Digest of chialab/php:7.4-fpm
+    image: chialab/php@sha256:793ef5d0f9e1e85acbb51507d7d6b97e7df6e7a105d0458801cc2d5711b3b2c8
     volumes:
-      - pki:/etc/pki
-      - ./ansistrano-wordpress:/root/ansistrano-wordpress
       - ./wordpress-s3:/app
       - vendor:/app/vendor
-      # - ../plugins:/plugins
+    working_dir: /app
+    
+  web:
+    depends_on:
+      - fpm
+      - ssl_certificate
+    container_name: web
+    image: nginx:1.19.0
+    ports:
+      - target: 80
+        published: 80
+      - target: 443
+        published: 443
+    restart: always
+    volumes:
+      - pki:/etc/pki
+      - ./wordpress-s3:/app
+      - ./nginx_conf.d:/etc/nginx/conf.d/
+
 volumes:
   pki:
-    driver_opts:
-      type: tmpfs
-      device: tmpfs
   vendor:
