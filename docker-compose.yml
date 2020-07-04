@@ -61,7 +61,7 @@ services:
       SECURE_AUTH_SALT: ${WORDPRESS_SECURE_AUTH_SALT}
       LOGGED_IN_SALT: ${WORDPRESS_LOGGED_IN_SALT}
       NONCE_SALT: ${WORDPRESS_NONCE_SALT}
-    image: futureys/heroku-php-apache2:201911.01
+    image: futureys/heroku-php-apache2:20200625182000
     ports:
       - 80:80
     privileged: true
