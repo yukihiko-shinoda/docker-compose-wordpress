@@ -38,10 +38,15 @@ services:
     command:
       - sh
       - -c
-      - "composer ${COMPOSER_COMMAND:-update} --prefer-dist --optimize-autoloader && php-fpm"
+      - >-
+        composer ${COMPOSER_COMMAND:-update} --prefer-dist --optimize-autoloader
+        && cp -p /etc/pki/CA/cacert-futureys.net.pem /usr/share/ca-certificates/cacert-futureys.net.crt
+        && echo cacert-futureys.net.crt >> /etc/ca-certificates.conf
+        && update-ca-certificates
+        && php-fpm
     depends_on:
       - database
-      # - composer
+      - ssl_certificate
     environment:
       # Bedrock
       DB_NAME: service
@@ -70,6 +75,7 @@ services:
     # Digest of chialab/php:7.4-fpm
     image: chialab/php@sha256:793ef5d0f9e1e85acbb51507d7d6b97e7df6e7a105d0458801cc2d5711b3b2c8
     volumes:
+      - pki:/etc/pki
       - ./wordpress-s3:/app
       - vendor:/app/vendor
     working_dir: /app
@@ -80,6 +86,12 @@ services:
       - ssl_certificate
     container_name: web
     image: nginx:1.19.0
+    # For rebuild static site by StaticPress2019
+    # @see https://stackoverflow.com/questions/29924843/how-do-i-set-hostname-in-docker-compose/47264089#47264089
+    networks:
+      default:
+        aliases:
+          - local.${DOMAIN_NAME}
     ports:
       - target: 80
         published: 80
