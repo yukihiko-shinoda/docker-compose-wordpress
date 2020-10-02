@@ -5,7 +5,3 @@ default_authentication_plugin=mysql_native_password
 require_secure_transport = ON
 # To secure database records more
 sql_mode = TRADITIONAL,NO_AUTO_VALUE_ON_ZERO,ONLY_FULL_GROUP_BY
-# SSL settings
-ssl-ca = /etc/pki/CA/cacert-futureys.net.pem
-ssl-cert = /etc/pki/tls/certs/servercert-futureys.net.pem
-ssl-key = /etc/pki/tls/private/serverkey-futureys.net.pem

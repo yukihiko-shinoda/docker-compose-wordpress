@@ -4,15 +4,20 @@ services:
   ssl_certificate:
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
-      USE_MYSQL: 'true'
     image: futureys/ssl-certificate:latest
     volumes:
       - pki:/etc/pki
 
   database:
+    command:
+      - --ssl-ca=/etc/pki/CA/cacert-${DOMAIN_NAME}.pem
+      - --ssl-cert=/etc/pki/tls/certs/servercert-${DOMAIN_NAME}.pem
+      - --ssl-key=/etc/pki/tls/private/serverkey-${DOMAIN_NAME}.pem
     depends_on:
       - ssl_certificate
+    entrypoint: setup-certificate.sh
     environment:
+      DOMAIN_NAME: ${DOMAIN_NAME}
       MYSQL_ROOT_PASSWORD: ${DATABASE_ROOT_PASSWORD}
       MYSQL_DATABASE: service
       MYSQL_USER: app
@@ -24,8 +29,9 @@ services:
     restart: always
     volumes:
       - pki:/etc/pki
-      - ./mysql_conf.d:/etc/mysql/conf.d
+      - ./database_entrypoint/setup-certificate.sh:/usr/local/bin/setup-certificate.sh
       - ./initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql_conf.d:/etc/mysql/conf.d
 
   fpm:
     # build:
@@ -37,8 +43,8 @@ services:
       - -c
       - >-
         composer ${COMPOSER_COMMAND:-update} --prefer-dist --optimize-autoloader
-        && cp -p /etc/pki/CA/cacert-futureys.net.pem /usr/share/ca-certificates/cacert-futureys.net.crt
-        && echo cacert-futureys.net.crt >> /etc/ca-certificates.conf
+        && cp -p /etc/pki/CA/cacert-${DOMAIN_NAME}.pem /usr/share/ca-certificates/cacert-${DOMAIN_NAME}.crt
+        && echo cacert-${DOMAIN_NAME}.crt >> /etc/ca-certificates.conf
         && update-ca-certificates
         && php-fpm
     depends_on:
