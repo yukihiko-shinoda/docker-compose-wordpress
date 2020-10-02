@@ -2,7 +2,6 @@
 version: '3.8'
 services:
   dump:
-    container_name: dump
     image: futureys/dump-mysql
     environment:
       LOGIN_USER: root

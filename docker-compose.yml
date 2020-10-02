@@ -2,7 +2,6 @@
 version: '3.8'
 services:
   ssl_certificate:
-    container_name: ssl_certificate
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
       USE_MYSQL: 'true'
@@ -11,7 +10,6 @@ services:
       - pki:/etc/pki
 
   database:
-    container_name: database
     depends_on:
       - ssl_certificate
     environment:
@@ -32,7 +30,6 @@ services:
   fpm:
     # build:
     #   context: fpm
-    container_name: fpm
     # Original: CMD ["php-fpm"]
     # @see https://github.com/docker-library/php/blob/b4aeb948e2e240c732d78890ff03285b16e8edda/7.0/fpm/Dockerfile
     command:
@@ -84,7 +81,6 @@ services:
     depends_on:
       - fpm
       - ssl_certificate
-    container_name: web
     image: nginx:1.19.0
     # For rebuild static site by StaticPress2019
     # @see https://stackoverflow.com/questions/29924843/how-do-i-set-hostname-in-docker-compose/47264089#47264089
