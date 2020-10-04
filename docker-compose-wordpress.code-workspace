@@ -1,0 +1,15 @@
+{
+	"folders": [
+		{
+			"path": "."
+		},
+		{
+			"path": "/var/www/html"
+		}
+	],
+	"settings": {
+		"intelephense.environment.includePaths": [
+			"/var/www/html"
+		],
+	}
+}

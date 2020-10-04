@@ -1,7 +1,8 @@
 /ansistrano-wordpress
-/wordpress-s3
-/initdb.d/*
-!/initdb.d/.gitkeep
+/backup
+/wordpress-fpm
+!/backup/inituploads.d/.gitkeep
+!/backup/initdb.d/.gitkeep
 /pki/*
 !/pki/.gitkeep
 /.idea/workspace.xml

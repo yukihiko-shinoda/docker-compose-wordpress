@@ -30,33 +30,25 @@ services:
     volumes:
       - pki:/etc/pki
       - ./database_entrypoint/setup-certificate.sh:/usr/local/bin/setup-certificate.sh
-      - ./initdb.d:/docker-entrypoint-initdb.d
+      - ./backup/initdb.d:/docker-entrypoint-initdb.d
       - ./mysql_conf.d:/etc/mysql/conf.d
 
-  fpm:
-    # build:
-    #   context: fpm
-    # Original: CMD ["php-fpm"]
-    # @see https://github.com/docker-library/php/blob/b4aeb948e2e240c732d78890ff03285b16e8edda/7.0/fpm/Dockerfile
-    command:
-      - sh
-      - -c
-      - >-
-        composer ${COMPOSER_COMMAND:-update} --prefer-dist --optimize-autoloader
-        && cp -p /etc/pki/CA/cacert-${DOMAIN_NAME}.pem /usr/share/ca-certificates/cacert-${DOMAIN_NAME}.crt
-        && echo cacert-${DOMAIN_NAME}.crt >> /etc/ca-certificates.conf
-        && update-ca-certificates
-        && php-fpm
+  wordpress-fpm:
+    build:
+      context: wordpress-fpm
     depends_on:
       - database
       - ssl_certificate
     environment:
+      # entrypoint
+      DOMAIN_NAME: ${DOMAIN_NAME}
       # Bedrock
       DB_NAME: service
       DB_USER: app
       DB_PASSWORD: ${DATABASE_USER_PASSWORD}
       # Optional variables
       DB_HOST: database
+      DB_PORT: 3306
       # DB_PREFIX=wp_
       WP_ENV: ${WORDPRESS_ENV?err}
       WP_HOME: https://local.${DOMAIN_NAME}
@@ -75,17 +67,30 @@ services:
       # StaticPress2019-S3
       # @see https://www.php.net/manual/en/function.finfo-open.php
       MAGIC: /etc/httpd/conf/magic
-    # Digest of chialab/php:7.4-fpm
-    image: chialab/php@sha256:793ef5d0f9e1e85acbb51507d7d6b97e7df6e7a105d0458801cc2d5711b3b2c8
+    image: futureys/wordpress-fpm:latest
     volumes:
       - pki:/etc/pki
-      - ./wordpress-s3:/app
-      - vendor:/app/vendor
-    working_dir: /app
-    
+      - ./wordpress-fpm/config:/var/www/html/config
+      - ./wordpress-fpm/wp-cli.yml:/var/www/html/wp-cli.yml
+      - ./wordpress-fpm/composer.json:/var/www/html/composer.json
+      - ./wordpress-fpm/composer.lock:/var/www/html/composer.lock
+      - ./wordpress-fpm/web/index.php:/var/www/html/web/index.php
+      - ./wordpress-fpm/web/wp-config.php:/var/www/html/web/wp-config.php
+      - ./wordpress-fpm/web/app/mu-plugins/bedrock-autoloader.php:/var/www/html/web/app/mu-plugins/bedrock-autoloader.php
+      - ./wordpress-fpm/web/app/mu-plugins/disallow-indexing.php:/var/www/html/web/app/mu-plugins/disallow-indexing.php
+      - ./wordpress-fpm/web/app/mu-plugins/register-theme-directory.php:/var/www/html/web/app/mu-plugins/register-theme-directory.php
+      - ./wordpress-fpm/web/app/mu-plugins:/var/www/html/web/app/mu-plugins
+      - ./wordpress-fpm/web/app/plugins/staticpress2019-s3:/var/www/html/web/app/plugins/staticpress2019-s3
+      - ./wordpress-fpm/web/app/themes:/var/www/html/web/app/themes
+      - plugins:/var/www/html/web/app/plugins
+      - upgrade:/var/www/html/web/app/upgrade
+      - uploads:/var/www/html/web/app/uploads
+      - wordpress:/var/www/html/web/wp
+      - ./backup/inituploads.d:/docker-entrypoint-inituploads.d
+
   web:
     depends_on:
-      - fpm
+      - wordpress-fpm
       - ssl_certificate
     image: nginx:1.19.0
     # For rebuild static site by StaticPress2019
@@ -102,9 +107,19 @@ services:
     restart: always
     volumes:
       - pki:/etc/pki
-      - ./wordpress-s3:/app
+      - ./wordpress-fpm/web/index.php:/var/www/html/web/index.php
+      - ./wordpress-fpm/web/wp-config.php:/var/www/html/web/wp-config.php
+      - ./wordpress-fpm/web/app/plugins/staticpress2019-s3:/var/www/html/web/app/plugins/staticpress2019-s3
+      - ./wordpress-fpm/web/app/themes:/var/www/html/web/app/themes
+      - plugins:/var/www/html/web/app/plugins
+      - upgrade:/var/www/html/web/app/upgrade
+      - uploads:/var/www/html/web/app/uploads
+      - wordpress:/var/www/html/web/wp
       - ./nginx_conf.d:/etc/nginx/conf.d/
 
 volumes:
   pki:
-  vendor:
+  plugins:
+  upgrade:
+  uploads:
+  wordpress:

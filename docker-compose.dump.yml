@@ -9,4 +9,17 @@ services:
       ANSIBLE_VERBOSITY: 3
       ANSIBLE_FORCE_COLOR: 'True'
     volumes:
-      - ./initdb.d:/root/storage
+      - ./backup/initdb.d:/root/storage
+  backup-uploads:
+    command:
+      - sh
+      - -c
+      - >-
+        apk --update add tzdata
+        && cp /usr/share/zoneinfo/Asia/Tokyo /etc/localtime
+        && chmod +x /root/storage/backup-uploads.sh
+        && /root/storage/backup-uploads.sh
+    image: alpine
+    volumes:
+      - uploads:/var/www/html/web/app/uploads
+      - ./backup/inituploads.d:/root/storage
