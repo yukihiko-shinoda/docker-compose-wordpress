@@ -1,4 +1,3 @@
-/ansistrano-wordpress
 /backup
 /wordpress-fpm
 !/backup/inituploads.d/.gitkeep

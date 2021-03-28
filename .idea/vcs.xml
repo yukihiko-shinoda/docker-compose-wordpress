@@ -2,7 +2,6 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="" vcs="Git" />
-    <mapping directory="$PROJECT_DIR$/ansistrano-wordpress" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wordpress-s3" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wordpress-s3/web/app/plugins/staticpress-s3" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/wordpress-s3/web/app/themes/simplicity2" vcs="Git" />
