@@ -28,9 +28,13 @@ services:
         published: 3306
     restart: always
     volumes:
+      # To enable SSL for MySQL serving.
       - pki:/etc/pki
+      # To wait for creating certificate and setup it.
       - ./database_entrypoint/setup-certificate.sh:/usr/local/bin/setup-certificate.sh
+      # To restore database.
       - ./backup/initdb.d:/docker-entrypoint-initdb.d
+      # To configure MySQL.
       - ./mysql_conf.d:/etc/mysql/conf.d
 
   wordpress-fpm:
@@ -69,7 +73,9 @@ services:
       MAGIC: /etc/httpd/conf/magic
     image: futureys/wordpress-fpm:latest
     volumes:
+      # To enable SSL for access to MySQL.
       - pki:/etc/pki
+      # To use latest version of project files.
       - ./wordpress-fpm/config:/var/www/html/config
       - ./wordpress-fpm/wp-cli.yml:/var/www/html/wp-cli.yml
       - ./wordpress-fpm/composer.json:/var/www/html/composer.json
@@ -82,10 +88,12 @@ services:
       - ./wordpress-fpm/web/app/mu-plugins:/var/www/html/web/app/mu-plugins
       - ./wordpress-fpm/web/app/plugins/staticpress2019-s3:/var/www/html/web/app/plugins/staticpress2019-s3
       - ./wordpress-fpm/web/app/themes:/var/www/html/web/app/themes
+      # See comment at volumes.
       - plugins:/var/www/html/web/app/plugins
       - upgrade:/var/www/html/web/app/upgrade
       - uploads:/var/www/html/web/app/uploads
       - wordpress:/var/www/html/web/wp
+      # To restore uploads.
       - ./backup/inituploads.d:/docker-entrypoint-inituploads.d
 
   web:
@@ -106,17 +114,23 @@ services:
         published: 443
     restart: always
     volumes:
+      # To enable SSL for HTTPS serving.
       - pki:/etc/pki
+      # Requires to work with nginx.conf.
       - ./wordpress-fpm/web/index.php:/var/www/html/web/index.php
       - ./wordpress-fpm/web/wp-config.php:/var/www/html/web/wp-config.php
       - ./wordpress-fpm/web/app/plugins/staticpress2019-s3:/var/www/html/web/app/plugins/staticpress2019-s3
       - ./wordpress-fpm/web/app/themes:/var/www/html/web/app/themes
+      # See comment at volumes.
       - plugins:/var/www/html/web/app/plugins
       - upgrade:/var/www/html/web/app/upgrade
       - uploads:/var/www/html/web/app/uploads
       - wordpress:/var/www/html/web/wp
+      # To configure Nginx.
       - ./nginx_conf.d:/etc/nginx/conf.d/
 
+# Some directory includes both PHP and static files,
+# it requires to share these directories with web service and fpm service.
 volumes:
   pki:
   plugins:
