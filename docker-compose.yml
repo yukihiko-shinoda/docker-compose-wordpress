@@ -95,6 +95,10 @@ services:
       - wordpress:/var/www/html/web/wp
       # To restore uploads.
       - ./backup/inituploads.d:/docker-entrypoint-inituploads.d
+      # To get static dump
+      - ./wordpress-fpm/web/static:/var/www/html/web/static
+      # For testing StaticPress2019
+      # - ../../projects/wordpress/plugins/staticpress2019:/staticpress2019
 
   web:
     depends_on:
