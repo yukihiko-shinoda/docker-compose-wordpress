@@ -1,8 +1,10 @@
 /backup
 /wordpress-fpm
 !/backup/inituploads.d/.gitkeep
+!/backup/inituploads.d/backup-uploads.sh
 !/backup/initdb.d/.gitkeep
 /pki/*
 !/pki/.gitkeep
 /.idea/workspace.xml
 /.env
+/*.pem
