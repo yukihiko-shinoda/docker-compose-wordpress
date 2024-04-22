@@ -1,10 +1,9 @@
 ---
-version: '3.8'
 services:
   ssl_certificate:
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
-    image: futureys/ssl-certificate:2.0.1
+    image: futureys/ssl-certificate:2.0.2
     volumes:
       - pki:/etc/pki
 
@@ -22,7 +21,7 @@ services:
       MYSQL_DATABASE: service
       MYSQL_USER: app
       MYSQL_PASSWORD: ${DATABASE_USER_PASSWORD}
-    image: mysql:8.0.31
+    image: mysql:8.3.0
     ports:
       - target: 3306
         published: 3306
@@ -98,13 +97,13 @@ services:
       # To get static dump
       - ./wordpress-fpm/web/static:/var/www/html/web/static
       # For testing StaticPress2019
-      # - ../../projects/wordpress/plugins/staticpress2019:/staticpress2019
+      # - ../../projects/wordpress/plugins/staticpress2019:/var/www/html/web/app/plugins/staticpress2019
 
   web:
     depends_on:
       - wordpress-fpm
       - ssl_certificate
-    image: nginx:1.22.1
+    image: nginx:1.25.5
     # For rebuild static site by StaticPress2019
     # @see https://stackoverflow.com/questions/29924843/how-do-i-set-hostname-in-docker-compose/47264089#47264089
     networks:

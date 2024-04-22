@@ -1,5 +1,4 @@
 ---
-version: '3.8'
 services:
   dump:
     image: futureys/dump-mysql
