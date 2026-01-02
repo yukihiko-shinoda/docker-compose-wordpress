@@ -3,7 +3,7 @@ services:
   ssl_certificate:
     environment:
       DOMAIN_NAME: ${DOMAIN_NAME}
-    image: futureys/ssl-certificate:2.0.2
+    image: futureys/ssl-certificate:2.4.0
     volumes:
       - pki:/etc/pki
 
