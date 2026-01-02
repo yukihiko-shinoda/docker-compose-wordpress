@@ -39,6 +39,7 @@ services:
   wordpress-fpm:
     build:
       context: wordpress-fpm
+      target: production
     depends_on:
       - database
       - ssl_certificate
